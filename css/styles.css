@@ -1,0 +1,15 @@
+.draggable {
+    width: 150px;
+    height: 150px;
+    padding: 0.5em;
+    border: 1px solid black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    transition: .15s;
+}
+
+.parent {
+    position: relative;
+}

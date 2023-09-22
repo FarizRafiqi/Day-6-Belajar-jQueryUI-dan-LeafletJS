@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Belajar Leaflet JS</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <style>
+        #map {
+            width: 500px;
+            height: 500px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1 class="text-center">Belajar Leaftlet JS</h1>
+<h3>Dari Tutorial Video</h3>
+<div id="map"></div>
+
+<br>
+
+<h3>Dari Tutorial Modul</h3>
+<div id="map2" style="height: 500px"></div>
+<script>
+    // Dari Tutorial Video
+    const map = L.map('map').setView([-6.225500707037012, 106.80657609884018], 16);
+
+    L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=LzmlZJWanUWMi37FMkYI', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    }).addTo(map);
+
+    const popup = L.popup()
+        .setLatLng([-6.225500707037012, 106.80657609884018])
+        .setContent("Ini Gedung SCBD")
+        .openOn(map);
+
+    // Dari Tutorial Modul
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position){
+            console.log(position);
+            const map2 = L.map('map2').setView([position.coords.latitude, position.coords.longitude], 13);
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map2);
+            const marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map2);
+        })
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+</script>
+</body>
+</html>
